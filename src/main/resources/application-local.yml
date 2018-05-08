@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      host: 172.17.0.2
+      database: demo

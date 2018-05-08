@@ -1,0 +1,59 @@
+plugins {
+	id 'eclipse'
+	id 'io.franzbecker.gradle-lombok' version '1.13'
+	id 'java'
+	id 'org.springframework.boot' version '2.0.1.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'de.tarent'
+version = '1.0.0'
+// stay with Java 9 as long as https://github.com/rzwitserloot/lombok/issues/1572 is not resolved
+sourceCompatibility = 9
+
+ext {
+	junitVersion = '5.2.0'
+	junitPlatformVersion = '1.2.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.springframework.boot:spring-boot-starter-webflux'
+
+	runtime 'org.springframework.boot:spring-boot-devtools'
+
+	testCompile 'io.projectreactor:reactor-test'
+	testCompile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.security:spring-security-test'
+
+	testRuntime 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+	// for Eclipse
+	testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+	testRuntime "org.junit.platform:junit-platform-launcher:$junitPlatformVersion"
+}
+
+test {
+    useJUnitPlatform()
+    reports {
+    	html.enabled = true
+    }
+}
+
+springBoot {
+	mainClassName = 'de.tarent.springboot2.SpringBoot2WebfluxApplication'
+}
+
+bootRun {
+	systemProperty 'spring.profiles.active', 'local'
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '4.7'
+}
