@@ -1,14 +1,14 @@
 plugins {
 	id 'eclipse'
-	id 'io.franzbecker.gradle-lombok' version '1.13'
+	id 'io.franzbecker.gradle-lombok' version '1.14'
 	id 'java'
-	id 'org.springframework.boot' version '2.0.1.RELEASE'
+	id 'org.springframework.boot' version '2.0.2.RELEASE'
 }
 
 apply plugin: 'io.spring.dependency-management'
 
 group = 'de.tarent'
-version = '1.0.0'
+version = '1.0.1'
 // stay with Java 9 as long as https://github.com/rzwitserloot/lombok/issues/1572 is not resolved
 sourceCompatibility = 9
 
@@ -26,7 +26,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-webflux'
 
-	runtime 'org.springframework.boot:spring-boot-devtools'
+	compile 'org.springframework.boot:spring-boot-devtools'
 
 	testCompile 'io.projectreactor:reactor-test'
 	testCompile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
@@ -47,7 +47,7 @@ test {
 }
 
 springBoot {
-	mainClassName = 'de.tarent.springboot2.SpringBoot2WebfluxApplication'
+	mainClassName = 'de.tarent.springboot2.sample.webflux.SpringBoot2WebfluxApplication'
 }
 
 bootRun {
