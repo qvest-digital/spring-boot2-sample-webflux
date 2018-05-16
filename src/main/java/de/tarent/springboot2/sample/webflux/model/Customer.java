@@ -1,8 +1,12 @@
 package de.tarent.springboot2.sample.webflux.model;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -20,6 +24,12 @@ public class Customer implements Cloneable {
 
 	@NotEmpty
 	private String lastName;
+	
+	@CreatedDate
+	private LocalDateTime created;
+	
+	@LastModifiedDate
+	private LocalDateTime lastModified;
 	
 	public Customer(String firstName, String lastName) {
 		this.firstName = firstName;

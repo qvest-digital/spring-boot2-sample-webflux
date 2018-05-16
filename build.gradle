@@ -8,7 +8,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'de.tarent'
-version = '1.0.2'
+version = '1.1.0'
 // stay with Java 9 as long as https://github.com/rzwitserloot/lombok/issues/1572 is not resolved
 sourceCompatibility = 9
 
