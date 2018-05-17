@@ -2,6 +2,58 @@
 
 This is a sample application using Spring Boot 2 with Spring Webflux.
 
+== Getting stated
+
+=== JDK 9
+
+In order to get started with this sample application you need to install JDK 9. You can use http://sdkman.io/[SDKMAN!] for that if you want.
+
+=== MongoDB
+
+The application need a running MongoDB instance, the easiest way to start one, is through docker
+
+[source, bash]
+----
+docker run --name some-mongo mongo
+----
+
+Then you need to get the IP address of the mongo container
+
+[source, bash]
+----
+docker inspect --format '{{ .NetworkSettings.IPAddress }}'  some-mongo
+----
+
+If the IP address is not `172.17.0.2`, then you must change the IP address specified in the file `src/main/resources/application-local.yml` under the key `spring.data.mongodb.host`
+
+[source, yaml]
+----
+spring:
+  data:
+    mongodb:
+      host: 172.17.0.2
+----
+
+=== Start the application
+
+In order to start the sample application just call
+
+[source, bash]
+----
+./gradlew bootRun
+----
+
+or on Windows
+
+[source, bash]
+----
+./gradlew.bat bootRun
+----
+
+=== IDE
+
+You can use an IDE to look at the source code, I recommend the https://spring.io/tools[Spring Tool Suite], but you use any IDE that you see fit.
+
 == Useful links
 
 * https://www.reactivemanifesto.org/[The Reactive Manifesto]
@@ -12,6 +64,8 @@ This is a sample application using Spring Boot 2 with Spring Webflux.
 * https://docs.spring.io/spring-security/site/docs/current/reference/html5/#test-webflux[Spring Security WebFlux testing support]
 
 == Example requests
+
+These example requests are issued through https://httpie.org/[HTTPie].
 
 .GET a list of customers
 [source, bash]
